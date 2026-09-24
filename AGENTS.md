@@ -30,6 +30,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
 | `game/engine/game.js` | State machine, room loading, collisions, rendering | game rules, new states |
 | `game/engine/hud.js` | Top bar, text drawing, dialog box | UI |
 | `game/engine/input.js` | Key/gamepad bindings | controls |
+| `game/engine/cheats.js` | Cheat codes typed as input sequences (Konami code = full health) | new cheats |
 | `game/loader.js` | Ordered list of script files | **add any new .js file here** |
 | `hackathon-quest.php` | WordPress plugin wrapper (shortcode `[hackathon_quest]`) | rarely |
 

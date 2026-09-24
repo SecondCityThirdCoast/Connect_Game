@@ -7,6 +7,7 @@
     'engine/util.js',
     'engine/input.js',
     'engine/audio.js',
+    'engine/cheats.js',
     'engine/sprites.js',
     'data/sprites.js',
     'data/tiles.js',

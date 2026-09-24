@@ -167,6 +167,7 @@
     this.stateTime = (this.stateTime || 0) + dt;
 
     if (Input.pressed('debug')) this.debug = !this.debug;
+    if (this.state === 'play' || this.state === 'pause') Game.Cheats.update(this); // cheat codes, see engine/cheats.js
 
     switch (this.state) {
       case 'title':

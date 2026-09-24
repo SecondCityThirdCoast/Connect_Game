@@ -18,6 +18,10 @@ Game.Audio = (function () {
     stairs:  [{ f: 400, to: 100, t: 0.3, type: 'triangle', v: 0.2 }],
     gameover:[{ f: 440, to: 110, t: 1.0, type: 'triangle', v: 0.25 }],
     enemyShot:[{ f: 250, to: 500, t: 0.08, type: 'square', v: 0.06 }],
+    secret:  [{ f: 784, t: 0.06, type: 'square', v: 0.1 }, { f: 988, t: 0.06, type: 'square', v: 0.1 },
+              { f: 1175, t: 0.06, type: 'square', v: 0.1 }, { f: 1568, t: 0.06, type: 'square', v: 0.1 },
+              { f: 1319, t: 0.06, type: 'square', v: 0.1 }, { f: 1760, t: 0.06, type: 'square', v: 0.1 },
+              { f: 2093, t: 0.25, type: 'square', v: 0.1 }],
   };
 
   var ctx = null;

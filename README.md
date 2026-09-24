@@ -8,7 +8,7 @@ A Zelda (NES) style action-adventure. It's plain JavaScript on a canvas with no 
 ## Play locally
 Double-click `index.html`, or serve the folder (`python -m http.server`) and open http://localhost:8000.
 
-**Controls:** Arrows/WASD move · Space/J/Z sword · Enter pause · `` ` `` debug hitboxes · gamepad supported.
+**Controls:** Arrows/WASD move · Space/J/Z sword · Enter pause · `` ` `` debug hitboxes · gamepad supported · Konami code ↑↑↓↓←→←→ B A (B = K/X, A = Space/J) refills your hearts.
 
 **Current content:** a 3×3 overworld, a sword cave with an old man, a 4-room dungeon (Level-1) with a key,
 a locked door, a mini-boss and the Triforce, and a 9-room cavern (Level-2) under the graveyard with

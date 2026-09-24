@@ -23,6 +23,7 @@
     'engine/game.js',
     'engine/bombs.js',
     'engine/ride.js',
+    'engine/shop.js',
     'engine/select.js',
     'engine/boot.js',
   ];

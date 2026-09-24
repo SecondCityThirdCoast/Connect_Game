@@ -90,7 +90,13 @@ for (const [id, room] of Object.entries(World.rooms)) {
   }
   if (room.clearReward && !Game.Items.defs[room.clearReward.type]) err(`${where}: unknown clearReward item "${room.clearReward.type}"`);
   if (room.clearReward && !room.clearReward.flag) err(`${where}: clearReward needs a flag`);
-  for (const n of room.npcs || []) if (!Game.Npcs.defs[n.type]) err(`${where}: unknown npc "${n.type}"`);
+  for (const n of room.npcs || []) {
+    if (!Game.Npcs.defs[n.type]) err(`${where}: unknown npc "${n.type}"`);
+    for (const w of n.wares || []) {
+      if (!Game.Items.defs[w.item]) err(`${where}: ${n.type} sells unknown item "${w.item}"`);
+      if (!(w.price > 0)) err(`${where}: ${n.type} ware ${w.item} has a bad price ${JSON.stringify(w.price)}`);
+    }
+  }
 
   // warps
   const warps = room.warps || [];

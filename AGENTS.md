@@ -33,6 +33,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
 | `game/engine/hud.js` | Top bar, text drawing, dialog box | UI |
 | `game/engine/bombs.js` | The B item: lit bomb, blast damage, explosion animation | bombs, other B items |
 | `game/engine/ride.js` | Winterbird rides: state `ride` that carries you to another room | fast travel |
+| `game/engine/shop.js` | Vendor menus: state `shop`, `tryInteract` for talk-to-NPC on the sword button | shops, dialogue |
 | `game/engine/select.js` | Hero select screen (state `select`, between title and play) | select screen |
 | `game/engine/input.js` | Key/gamepad bindings | controls |
 | `game/engine/cheats.js` | Cheat codes typed as input sequences (Konami code = full health) | new cheats |
@@ -57,9 +58,11 @@ Load order matters: engine basics → data/sprites → tiles → world → entit
 - Treasure chests (`chest` item) open on touch, roll `Game.CHEST_LOOT` (or a placed chest's `loot`) and
   print what was inside. One may appear on a free tile of any room on entry (`Config.CHEST.CHANCE`,
   once per room; `?chest=1` forces one; `chest: false` on a room opts out).
-- Shop items are room `items` with a `price`: they cost rupees, refuse you with a message until you
-  can pay, and restock every visit (see the `shop` room). `inventory.lives` (the `life` item) turns a
-  death into a respawn at the tile where you entered the room.
+- Shops: a vendor NPC (type with an `interact` hook, like `merchant`) lists `wares: [{item, price, label}]`
+  in its room entry; it draws them on the counter (`t` tiles) in front of it and pressing the sword
+  button within 3 tiles opens the buy menu (`engine/shop.js`). Room `items` with a `price` still work
+  as walk-over stalls. `inventory.lives` (the `life` item) turns a death into a respawn at the tile
+  where you entered the room.
 
 ## Recipes
 

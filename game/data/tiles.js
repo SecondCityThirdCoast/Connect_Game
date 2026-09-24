@@ -31,6 +31,8 @@ Game.Tiles = {
   '*': { sprite: 'tile_bones' },
   '&': { sprite: 'tile_shrooms' },
   'D': { sprite: 'tile_locked', solid: true, locked: true, opensTo: ':' },
+  // Shop
+  't': { sprite: 'tile_table', solid: true },
 };
 
 Game.Tiles.DEFAULT = '.';

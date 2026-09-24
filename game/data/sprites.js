@@ -492,6 +492,89 @@
     '..bbbb..bbbb....',
   ]);
 
+  D('salamander_0', [
+    '................',
+    '....RRRRRRRR....',
+    '...RRRRRRRRRR...',
+    '..RRWKRRRRKWRR..',
+    '..RRRRRRRRRRRR..',
+    '..RROOOOOOOORR..',
+    '...ROyyyyyyOR...',
+    '....RRRRRRRR....',
+    '.RR.RRRRRRRR.RR.',
+    '.RRRRROOOORRRRR.',
+    '..RRROOOOOORRR..',
+    '..RRRROOOORRRR..',
+    '.RR.RRRRRRRR.RR.',
+    '.RR..RRRRRR..RR.',
+    '......RRRR..RR..',
+    '.......RRRRRR...',
+  ]);
+  D('salamander_1', [
+    '................',
+    '....RRRRRRRR....',
+    '...RRRRRRRRRR...',
+    '..RRWKRRRRKWRR..',
+    '..RRRRRRRRRRRR..',
+    '..RROOOOOOOORR..',
+    '...ROyyyyyyOR...',
+    '....RRRRRRRR....',
+    'RR..RRRRRRRR..RR',
+    '.RRRRROOOORRRRR.',
+    '..RRROOOOOORRR..',
+    '..RRRROOOORRRR..',
+    '.RRRRRRRRRRRRRR.',
+    'RR...RRRRRR...RR',
+    '..RR..RRRR......',
+    '...RRRRRR.......',
+  ]);
+  D('salamander_right_0', [
+    '................',
+    '..........RRRR..',
+    '.........RRRRRR.',
+    '........RRWKRRRR',
+    '.......RRRRRROOO',
+    'R.....RRRRRRRRRO',
+    'RR..RRRRROORRRR.',
+    '.RRRRRROOOORRR..',
+    '..RRRROOOOOORR..',
+    '...RRRROOOORRR..',
+    '....RRRRRRRRRR..',
+    '....RR.RR.RR.R..',
+    '...RR..RR..RR...',
+    '................',
+    '................',
+    '................',
+  ]);
+  D('salamander_right_1', [
+    '................',
+    '..........RRRR..',
+    '.........RRRRRR.',
+    '........RRWKRRRR',
+    '.......RRRRRROOO',
+    '.R....RRRRRRRRRO',
+    '.RR.RRRRROORRRR.',
+    '..RRRRRROOOORRR.',
+    '..RRRROOOOOORR..',
+    '...RRRROOOORRR..',
+    '....RRRRRRRRRR..',
+    '....R.RR.RR.RR..',
+    '.....RR..RR..RR.',
+    '................',
+    '................',
+    '................',
+  ]);
+  D('fireball_0', ['..OOOO..', '.OyyyyO.', 'OyyWWyyO', 'OyWWWWyO', 'OyWWWWyO', 'OyyWWyyO', '.OyyyyO.', '..OOOO..']);
+  D('fireball_1', ['..RRRR..', '.ROOOOR.', 'ROyyyyOR', 'ROyWWyOR', 'ROyWWyOR', 'ROyyyyOR', '.ROOOOR.', '..RRRR..']);
+  D('flame_0', [
+    '.....R......', '....RR..R...', '...RRO.RR...', '..RROO.ROR..', '..ROOO.OOR..', '.RROyOOOyOR.',
+    '.ROyyOOyyOR.', '.ROyWyyWyOR.', '.ROyWWWWyOR.', '..ROyWWyOR..', '...ROyyOR...', '....RRRR....',
+  ]);
+  D('flame_1', [
+    '......R.....', '...R..RR....', '...RR.ORR...', '..ROR.OORR..', '..ROO.OOOR..', '.ROyOOOyORR.',
+    '.ROyyOOyyOR.', '.ROyWyyWyOR.', '.ROyWWWWyOR.', '..ROyWWyOR..', '...ROyyOR...', '....RRRR....',
+  ]);
+
   D('keese_0', [
     'u..............u',
     'uu............uu',
@@ -1009,6 +1092,9 @@
   ]);
   T('tile_bones', [
     'aaaaaaaa', 'aWWWWWaa', 'aWKWKWaa', 'aWWWWWaa', 'aaWaWaaa', 'aaaaaWWa', 'aaaaWWaa', 'aaaaaaaa',
+  ]);
+  T('tile_table', [
+    'OOOOOOOO', 'BBBBBBBB', 'bbbbbbbb', 'BBBBBBBB', 'BBBBBBBB', 'bbbbbbbb', 'BBBBBBBB', 'bbbbbbbb',
   ]);
   T('tile_shrooms', [
     'aaaaaaaa', 'aaCCaaaa', 'aCCCCaaa', 'aaWWaaCa', 'aaWWaCCC', 'aaaaaaWa', 'aMMaaaWa', 'aWWaaaaa',

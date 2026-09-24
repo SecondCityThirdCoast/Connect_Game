@@ -205,7 +205,9 @@
   };
 
   // ---------------------------------------------------------------- Projectile
-  // opts: {x, y, dir, speed, sprite, damage, team:'player'|'enemy', pierce, onHit, w, h}
+  // opts: {x, y, dir, speed, sprite, damage, team:'player'|'enemy', pierce, onHit, w, h,
+  //        vx, vy: px/s for a free-angle shot (replaces dir * speed), lifetime: seconds before it fades}
+  // A sprite with '_0' and '_1' frames animates.
   function Projectile(opts) {
     Entity.call(this, opts.x, opts.y);
     this.dir = opts.dir;
@@ -215,6 +217,9 @@
     this.pierce = !!opts.pierce;
     this.onHit = opts.onHit;
     this.kind = opts.kind || 'projectile';
+    this.vx = opts.vx;
+    this.vy = opts.vy;
+    this.lifetime = opts.lifetime;
     var img = Game.Sprites.get(this.resolveSprite(opts.sprite));
     this.baseSprite = opts.sprite;
     this.w = opts.w || (img ? img.width : 6);
@@ -224,15 +229,26 @@
   Projectile.prototype = Object.create(Entity.prototype);
   Projectile.prototype.resolveSprite = function (base) {
     var S = Game.Sprites, d = this.dir;
+    if (S.has(base + '_0')) return base + '_' + (Math.floor(this.animTime * 10) % 2);
     if (d === 'down' && S.has(base + '_up')) return base + '_up';
     if (d === 'left' && S.has(base + '_right')) return base + '_right';
     if (S.has(base + '_' + d)) return base + '_' + d;
     return base;
   };
   Projectile.prototype.update = function (dt, game) {
-    var d = U.DIRS[this.dir];
-    this.x += d.x * this.speed * dt;
-    this.y += d.y * this.speed * dt;
+    this.animTime += dt;
+    if (this.vx !== undefined || this.vy !== undefined) {
+      this.x += (this.vx || 0) * dt;
+      this.y += (this.vy || 0) * dt;
+    } else {
+      var d = U.DIRS[this.dir];
+      this.x += d.x * this.speed * dt;
+      this.y += d.y * this.speed * dt;
+    }
+    if (this.lifetime !== undefined) {
+      this.lifetime -= dt;
+      if (this.lifetime <= 0) this.dead = true;
+    }
     if (!this.inRoom(8) || game.room.blocked(this.box(), { overWater: true })) this.dead = true;
   };
   Projectile.prototype.draw = function (ctx, ox, oy) {
@@ -310,6 +326,7 @@
     if (this.spec.update) this.spec.update(this, dt, game);
   };
   Npc.prototype.draw = function (ctx, ox, oy) {
+    if (this.spec.draw) return this.spec.draw(this, ctx, ox, oy);
     this.drawSprite(ctx, this.spec.sprite || this.type, ox, oy);
   };
 

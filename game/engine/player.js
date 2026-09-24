@@ -56,6 +56,7 @@
       return;
     }
 
+    if (Input.pressed('attack') && game.tryInteract && game.tryInteract()) return; // talk to a vendor
     if (Input.pressed('attack') && this.hasSword) {
       this.attack(game);
       return;

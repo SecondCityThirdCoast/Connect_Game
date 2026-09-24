@@ -201,6 +201,9 @@
       case 'ride':
         this.updateRide(dt);
         break;
+      case 'shop':
+        this.updateShop(dt);
+        break;
       case 'play':
         if (Input.pressed('start')) { this.state = 'pause'; break; }
         this.updatePlay(dt);
@@ -364,6 +367,7 @@
       ctx.fillStyle = 'rgba(0,0,0,' + (f.t < 1 ? f.t : 2 - f.t) + ')';
       ctx.fillRect(0, oy, C.WIDTH, C.ROOM_HEIGHT);
     }
+    if (this.state === 'shop') this.renderShop(ctx);
     if (this.state === 'pause') this.renderOverlay(ctx, 'PAUSED', ['ARROWS/WASD  MOVE', 'SPACE/J  SWORD', 'K/X  BOMB', 'ENTER  RESUME', '`  DEBUG VIEW']);
     if (this.state === 'gameover') this.renderOverlay(ctx, 'GAME OVER', ['PRESS ENTER TO CONTINUE'], '#d82800');
     if (this.state === 'win') this.renderOverlay(ctx, 'YOU WIN!', ['YOU RECOVERED THE TRIFORCE', '', 'RUPEES: ' + this.inventory.rupees, '', 'PRESS ENTER'], '#f8b800');

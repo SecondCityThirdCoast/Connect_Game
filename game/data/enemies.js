@@ -102,6 +102,72 @@
     e.walk(dt, game.room);
   };
 
+  // Level-1 boss AI. Stalks you, then either breathes a fan of fireballs (aim -> breath) or
+  // charges across the room leaving burning ground (wind -> charge). Under a third of its
+  // health it breathes a wider fan and charges faster.
+  var SAL = { FAN: 3, FAN_RAGE: 5, SPREAD: 0.5, CHARGE: 210, CHARGE_RAGE: 260, FIREBALL: 130, FLAME_EVERY: 0.07 };
+  function salamanderRage(e) { return e.hp <= Math.ceil(e.spec.hp / 3); }
+  function salamanderBreath(e, game, n) {
+    var c = e.center(), p = game.player.center();
+    var base = Math.atan2(p.y - c.y, p.x - c.x);
+    for (var i = 0; i < n; i++) {
+      var a = base + (i - (n - 1) / 2) * SAL.SPREAD;
+      game.spawn(new Game.Projectile({
+        x: c.x - 4, y: c.y - 4, dir: e.dir, sprite: 'fireball', damage: 2, team: 'enemy',
+        vx: Math.cos(a) * SAL.FIREBALL, vy: Math.sin(a) * SAL.FIREBALL,
+      }));
+    }
+    Game.Audio.play('fire');
+  }
+  function salamanderFlame(e, game) {
+    var c = e.center();
+    game.spawn(new Game.Projectile({
+      x: c.x - 6, y: c.y - 6, dir: e.dir, speed: 0, sprite: 'flame', damage: 1, team: 'enemy',
+      lifetime: U.rand(1.2, 1.8),
+    }));
+  }
+  B.salamander = function (e, dt, game) {
+    var rage = salamanderRage(e), c = e.center(), p = game.player.center();
+    e.timer -= dt;
+    if (e.state === 'aim') {
+      if (e.timer > 0) return;
+      salamanderBreath(e, game, rage ? SAL.FAN_RAGE : SAL.FAN);
+      e.state = 'walk';
+      e.timer = U.rand(0.6, 1.0);
+      return;
+    }
+    if (e.state === 'wind') {
+      if (e.timer > 0) return;
+      e.state = 'charge';
+      e.timer = 0.55;
+      e.trail = 0;
+      e.dir = U.dirToward(c, p);
+      return;
+    }
+    if (e.state === 'charge') {
+      var d = U.DIRS[e.dir], speed = rage ? SAL.CHARGE_RAGE : SAL.CHARGE;
+      var blocked = e.tryMove(d.x * speed * dt, d.y * speed * dt, game.room, { edgesSolid: true });
+      e.trail -= dt;
+      if (e.trail <= 0) { e.trail = SAL.FLAME_EVERY; salamanderFlame(e, game); }
+      if (blocked || e.timer <= 0) { e.clampToRoom(); e.state = 'walk'; e.timer = U.rand(0.5, 0.9); }
+      return;
+    }
+    // stalk
+    if (e.timer <= 0) {
+      e.stalked = (e.stalked || 0) + 1;
+      if (e.stalked > 1 && U.chance(rage ? 0.7 : 0.5)) {
+        e.stalked = 0;
+        e.dir = U.dirToward(c, p);
+        if (U.chance(0.5)) { e.state = 'aim'; e.timer = 0.45; Game.Audio.play('hiss'); }
+        else { e.state = 'wind'; e.timer = 0.5; Game.Audio.play('roar'); }
+        return;
+      }
+      e.dir = U.chance(0.8) ? U.dirToward(c, p) : U.randomDir();
+      e.timer = U.rand(0.4, 0.9);
+    }
+    e.walk(dt, game.room);
+  };
+
   // ------------------------------------------------------------------ loot
   // weight = relative chance, value = item type or null (nothing)
   var DEFAULT_DROPS = [
@@ -162,15 +228,16 @@
     drops: DEFAULT_DROPS,
   });
 
-  // Mini-boss: tough chaser that guarantees a heart container.
-  E.define('boss_moblin', {
-    sprite: 'moblin', hp: 8, speed: 45, damage: 2,
-    behavior: 'chase', knockback: false,
+  // Level-1 boss: a fire salamander. See B.salamander for its attacks. Always drops a heart container.
+  E.define('boss_salamander', {
+    sprite: 'salamander', hp: 20, speed: 60, damage: 2,
+    behavior: 'salamander', knockback: false, animSpeed: 5, projectile: 'fireball',
     drops: [{ weight: 1, value: 'heart_container' }],
     draw: function (e, ctx, ox, oy) {
       ctx.save();
-      ctx.filter = e.invuln > 0 ? 'invert(1)' : 'hue-rotate(-40deg) saturate(2)';
-      e.drawSprite(ctx, 'moblin', ox, oy);
+      if (e.state === 'wind' && Math.floor(e.animTime * 12) % 2) ctx.filter = 'brightness(1.7)';
+      else if (salamanderRage(e)) ctx.filter = 'saturate(1.7) hue-rotate(-12deg)';
+      e.drawSprite(ctx, 'salamander', ox, oy, { flash: e.invuln > 0 });
       ctx.restore();
     },
   });

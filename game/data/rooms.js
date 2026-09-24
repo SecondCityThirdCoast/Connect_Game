@@ -13,6 +13,7 @@
 //            a {type: 'chest', x, y, flag, loot: 'key'} is a treasure chest with fixed contents
 //   chest:   false to keep random treasure chests out of this room (Config.CHEST.CHANCE)
 //   npcs:    [{type: 'oldman', x, y, text: 'Shown when the room is entered'}]
+//            a vendor adds wares: [{item, price, label}] (see the shop room)
 //   warps:   [{x, y, to: 'roomId', tx, ty}] -- stepping on warp tile (x,y) sends the
 //            player to tile (tx,ty) of room `to`. Warp tiles are 'C' (cave) and '>' (stairs).
 //   clearReward: {type, x, y, flag} -- item appears when every enemy is dead
@@ -152,7 +153,8 @@
     warps: [{ x: 3, y: 2, to: 'shop', tx: 7, ty: 9 }],
   });
 
-  // The shop, through the cave in the lone rock at (3,2) of 'west'. Items with a price restock every visit.
+  // The shop, through the cave in the lone rock at (3,2) of 'west'. The merchant stands behind a
+  // counter ('t' tiles); press the sword button at the counter to open the buy menu (engine/shop.js).
   W.room('shop', {
     area: 'caves',
     chest: false, // no random treasure chests in the shop
@@ -161,7 +163,7 @@
       'RRRRRRRRRRRRRRRR',
       'RR            RR',
       'RR            RR',
-      'RR            RR',
+      'RR  ttttttt   RR',
       'RR            RR',
       'RR            RR',
       'RR            RR',
@@ -170,14 +172,16 @@
       'RRRRRRRCCRRRRRRR',
     ],
     npcs: [
-      { type: 'merchant', x: 7, y: 3, text: "BUY SOMETHIN' WILL YA!" },
+      {
+        type: 'merchant', x: 7, y: 3, text: "BUY SOMETHIN' WILL YA!",
+        wares: [
+          { item: 'heart', price: 5, label: 'HEART' },
+          { item: 'key', price: 15, label: 'KEY' },
+          { item: 'life', price: 30, label: 'EXTRA LIFE' },
+        ],
+      },
       { type: 'fire', x: 4, y: 3 },
       { type: 'fire', x: 10, y: 3 },
-    ],
-    items: [
-      { type: 'heart', x: 5, y: 7, price: 5 },
-      { type: 'key', x: 7, y: 7, price: 15 },
-      { type: 'life', x: 9, y: 7, price: 30 },
     ],
     warps: [
       { x: 7, y: 10, to: 'west', tx: 3, ty: 3 },
@@ -341,7 +345,7 @@
       '#ffffffffffffff#',
       '#######ff#######',
     ],
-    enemies: [{ type: 'boss_moblin', x: 7, y: 3 }],
+    enemies: [{ type: 'boss_salamander', x: 7, y: 3 }],
     clearReward: { type: 'triforce', x: 7, y: 5, flag: 'triforce' },
   });
 

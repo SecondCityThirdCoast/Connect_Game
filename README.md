@@ -10,7 +10,7 @@ Double-click `index.html`, or serve the folder (`python -m http.server`) and ope
 
 **Controls:** ←/→ and Enter pick a hero on the start screen · Arrows/WASD move · Space/J/Z sword · K/X drop a bomb · Enter pause · `` ` `` debug hitboxes · gamepad supported · Konami code ↑↑↓↓←→←→ B A (B = K/X, A = Space/J) refills your hearts.
 
-**Current content:** three playable heroes (Jamie, Mark and Chris) picked on the start screen, a 3×3 overworld, a sword cave with an old man, a shop selling hearts, keys and extra lives, a 4-room dungeon (Level-1) with a key,
+**Current content:** three playable heroes (Jamie, Mark and Chris) picked on the start screen, a 3×3 overworld, a sword cave with an old man, a shop selling hearts, keys and extra lives, treasure chests that can turn up in any room, a 4-room dungeon (Level-1) with a key,
 a locked door, a mini-boss and the Triforce, and a 9-room cavern (Level-2) under the graveyard with
 ghosts, skeletons, a wraith boss, the white sword and a winterbird that flies you to the final boss. There are 8 enemy types, 9 items, room-scroll
 transitions, warps, heart containers, a sword beam at full health, bombs that blast a 3×3 area, and game over/continue.

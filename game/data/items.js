@@ -55,6 +55,40 @@
     onPickup: function (game) { game.win(); },
   });
 
+  // Treasure chest: opens on touch and prints what was inside. Random chests appear on room entry
+  // (Config.CHEST.CHANCE, once per room). Place one with { type: 'chest', x, y, flag: 'chest_x' } and
+  // add loot: 'key' to fix its contents; otherwise it rolls this table (weights are relative).
+  var CHEST_LOOT = [
+    { weight: 3, value: { item: 'rupee', n: 5, text: '5 RUPEES' } },
+    { weight: 2, value: { item: 'rupee_blue', n: 2, text: '10 RUPEES' } },
+    { weight: 2, value: { item: 'heart', n: 1, text: 'A HEART' } },
+    { weight: 2, value: { item: 'bomb', n: 1, text: '4 BOMBS' } },
+    { weight: 1.5, value: { item: 'key', n: 1, text: 'A KEY' } },
+    { weight: 0.6, value: { item: 'life', n: 1, text: 'AN EXTRA LIFE' } },
+    { weight: 0.4, value: { item: 'heart_container', n: 1, text: 'A HEART CONTAINER' } },
+    { weight: 1.5, value: null }, // empty
+  ];
+  Game.CHEST_LOOT = CHEST_LOOT;
+  function lootEntry(item) {
+    for (var i = 0; i < CHEST_LOOT.length; i++) if (CHEST_LOOT[i].value && CHEST_LOOT[i].value.item === item) return CHEST_LOOT[i].value;
+    return { item: item, n: 1, text: 'A ' + item.toUpperCase().replace(/_/g, ' ') };
+  }
+  I.define('chest', {
+    sprite: 'chest',
+    sound: 'chest',
+    loot: CHEST_LOOT,
+    onPickup: function (game, p, pickup) {
+      var got = pickup && pickup.loot ? lootEntry(pickup.loot) : Game.Util.weighted(CHEST_LOOT);
+      var x = pickup ? pickup.x : p.x, y = pickup ? pickup.y : p.y;
+      game.spawn(new Game.Npc('chest_open', x, y)); // the empty chest stays until you leave
+      if (!got) { Game.Audio.play('deny'); game.say('THE CHEST IS EMPTY!'); return; }
+      var spec = Game.Items.get(got.item);
+      for (var i = 0; i < (got.n || 1); i++) if (spec && spec.onPickup) spec.onPickup(game, p);
+      Game.Audio.play(spec && spec.sound ? spec.sound : 'item');
+      game.say('YOU FOUND ' + got.text + '!');
+    },
+  });
+
   // Sold in the shop. Spent automatically when your hearts run out: you respawn where you entered the room.
   I.define('life', {
     sprite: 'doll',

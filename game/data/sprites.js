@@ -785,6 +785,34 @@
 
   // ---------------------------------------------------------------- ITEMS
   D('doll', ['..gggg..', '.gGGGGg.', '.SSSSSS.', '.SKSSKS.', '..SSSS..', '.gGGGGg.', 'SGGyyGGS', '.GGGGGG.', '.bb..bb.', '.bb..bb.']);
+  D('chest', [
+    '.bbbbbbbbbbbbbb.',
+    'bBByBBBBBBBByBBb',
+    'bBByBBBBBBBByBBb',
+    'bBByBBBBBBBByBBb',
+    'bbbbbbbbbbbbbbbb',
+    'bBByBBByyBBByBBb',
+    'bBByBBByKBBByBBb',
+    'bBByBBBBBBBByBBb',
+    'bBByBBBBBBBByBBb',
+    'bBBBBBBBBBBBBBBb',
+    'bbbbbbbbbbbbbbbb',
+    '.bb..........bb.',
+  ]);
+  D('chest_open', [
+    '.bbbbbbbbbbbbbb.',
+    'bBByBBBBBBBByBBb',
+    'bBBBBBBBBBBBBBBb',
+    'bKKKKKKKKKKKKKKb',
+    'bKKKKKKKKKKKKKKb',
+    'bbbbbbbbbbbbbbbb',
+    'bBByBBBBBBBByBBb',
+    'bBByBBByyBBByBBb',
+    'bBByBBBBBBBByBBb',
+    'bBBBBBBBBBBBBBBb',
+    'bbbbbbbbbbbbbbbb',
+    '.bb..........bb.',
+  ]);
   D('heart', ['.RR.RR.', 'RRRRRRR', 'RWRRRRR', 'RRRRRRR', '.RRRRR.', '..RRR..', '...R...']);
   D('heart_empty', ['.rr.rr.', 'r..r..r', 'r.....r', 'r.....r', '.r...r.', '..r.r..', '...r...']);
   D('heart_half', ['.RR.rr.', 'RRRR..r', 'RWRR..r', 'RRRR..r', '.RRR.r.', '..RRr..', '...R...']);

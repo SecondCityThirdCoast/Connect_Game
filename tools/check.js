@@ -86,6 +86,7 @@ for (const [id, room] of Object.entries(World.rooms)) {
     if (!Game.Items.defs[it.type]) err(`${where}: unknown item "${it.type}"`);
     if (!passable(tileAt(it.x, it.y))) warn(`${where}: item ${it.type} on solid tile ${it.x},${it.y}`);
     if (it.price !== undefined && !(it.price > 0)) err(`${where}: item ${it.type} has a bad price ${JSON.stringify(it.price)}`);
+    if (it.loot && !Game.Items.defs[it.loot]) err(`${where}: chest loot "${it.loot}" is not an item`);
   }
   if (room.clearReward && !Game.Items.defs[room.clearReward.type]) err(`${where}: unknown clearReward item "${room.clearReward.type}"`);
   if (room.clearReward && !room.clearReward.flag) err(`${where}: clearReward needs a flag`);

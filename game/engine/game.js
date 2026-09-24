@@ -101,7 +101,7 @@
 
     (def.items || []).forEach(function (it) {
       if (it.flag && self.flags[it.flag]) return;
-      self.spawn(new Game.Pickup(it.type, it.x * C.TILE, it.y * C.TILE, { flag: it.flag, price: it.price }));
+      self.spawn(new Game.Pickup(it.type, it.x * C.TILE, it.y * C.TILE, { flag: it.flag, price: it.price, loot: it.loot }));
     });
     (def.npcs || []).forEach(function (n) {
       self.spawn(new Game.Npc(n.type, n.x * C.TILE, n.y * C.TILE, n));
@@ -117,6 +117,11 @@
       if (tile) self.spawn(new Game.Enemy(spec.type, tile.x * C.TILE, tile.y * C.TILE));
     });
     this.hadEnemies = this.entities.some(function (e) { return e instanceof Game.Enemy; });
+    // A treasure chest may turn up on a free tile, once per room (Config.CHEST; ?chest=1 forces one).
+    if (def.chest !== false && !this.flags['chest:' + this.room.id] && (U.chance(C.CHEST.CHANCE) || this.params.get('chest'))) {
+      var ct = this.freeTile();
+      if (ct) this.spawn(new Game.Pickup('chest', ct.x * C.TILE, ct.y * C.TILE, { flag: 'chest:' + this.room.id }));
+    }
     if (def.onEnter) def.onEnter(this, this.room);
   };
 

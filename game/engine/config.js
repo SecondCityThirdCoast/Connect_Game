@@ -33,6 +33,10 @@ Game.Config = {
     MAX_ACTIVE: 2,         // lit bombs allowed at once
   },
 
+  CHEST: {
+    CHANCE: 0.15,          // chance a treasure chest appears when you enter a room (once per room)
+  },
+
   SCROLL_TIME: 0.6,        // seconds for room-to-room scroll
   FADE_TIME: 0.35,         // seconds for warps (caves / stairs)
   DEBUG: false,            // toggle in-game with the ` key (shows hitboxes)

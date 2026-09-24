@@ -10,6 +10,8 @@
 //            or [{type: 'octorok', x: 3, y: 4}] -> exact tile
 //   items:   [{type: 'key', x, y, flag: 'unique_flag'}] -- with flag = only collectable once
 //            add price: 15 for a shop item (costs rupees, refused until you can pay, restocks)
+//            a {type: 'chest', x, y, flag, loot: 'key'} is a treasure chest with fixed contents
+//   chest:   false to keep random treasure chests out of this room (Config.CHEST.CHANCE)
 //   npcs:    [{type: 'oldman', x, y, text: 'Shown when the room is entered'}]
 //   warps:   [{x, y, to: 'roomId', tx, ty}] -- stepping on warp tile (x,y) sends the
 //            player to tile (tx,ty) of room `to`. Warp tiles are 'C' (cave) and '>' (stairs).
@@ -49,6 +51,7 @@
 
   W.room('cave_sword', {
     area: 'caves',
+    chest: false,
     map: [
       'RRRRRRRRRRRRRRRR',
       'RRRRRRRRRRRRRRRR',
@@ -152,6 +155,7 @@
   // The shop, through the cave in the lone rock at (3,2) of 'west'. Items with a price restock every visit.
   W.room('shop', {
     area: 'caves',
+    chest: false, // no random treasure chests in the shop
     map: [
       'RRRRRRRRRRRRRRRR',
       'RRRRRRRRRRRRRRRR',

@@ -8,6 +8,7 @@
   N.define('oldman', { sprite: 'oldman' });
   N.define('fire', { sprite: 'fire' });
   N.define('merchant', { sprite: 'merchant' }); // shopkeeper; items with a `price` do the selling
+  N.define('chest_open', { sprite: 'chest_open' }); // left behind by an opened treasure chest
 
   // Hovers in place; touch it and it carries you to npc.opts.ride (engine/ride.js).
   N.define('winterbird', {

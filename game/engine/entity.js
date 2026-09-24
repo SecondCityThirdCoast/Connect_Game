@@ -249,7 +249,8 @@
 
   // ---------------------------------------------------------------- Pickup
   // opts: {lifetime: seconds or null, flag: string -- set when collected so it never respawns,
-  //        price: rupees -- a shop item: refused (with a message) until you can pay, restocks each visit}
+  //        price: rupees -- a shop item: refused (with a message) until you can pay, restocks each visit,
+  //        loot: item type -- what a treasure chest holds (otherwise it rolls Game.CHEST_LOOT)}
   function Pickup(type, x, y, opts) {
     Entity.call(this, x, y);
     opts = opts || {};
@@ -258,6 +259,7 @@
     this.lifetime = opts.lifetime || null;
     this.flag = opts.flag || null;
     this.price = opts.price || 0;
+    this.loot = opts.loot || null;
     this.denied = false; // shown the 'not enough rupees' message; resets once you step off
     this.hb = { x: 2, y: 2, w: 12, h: 12 };
   }
@@ -275,7 +277,7 @@
       if (!this.denied) { this.denied = true; Game.Audio.play('deny'); game.say('NOT ENOUGH RUPEES.'); }
       return;
     }
-    var ok = this.spec.onPickup ? this.spec.onPickup(game, game.player) !== false : true;
+    var ok = this.spec.onPickup ? this.spec.onPickup(game, game.player, this) !== false : true;
     if (!ok) return;
     if (this.price) game.inventory.rupees -= this.price;
     this.dead = true;

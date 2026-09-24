@@ -85,6 +85,23 @@
     if (e.hopping) e.walk(dt, game.room);
   };
 
+  // Shamble toward the player in lurches, stopping now and then to stand and drool.
+  B.shamble = function (e, dt, game) {
+    e.timer -= dt;
+    if (e.timer <= 0) {
+      if (e.state !== 'drool' && U.chance(0.35)) {
+        e.state = 'drool';
+        e.timer = U.rand(0.5, 1.0);
+      } else {
+        e.state = 'lurch';
+        e.dir = U.chance(0.8) ? U.dirToward(e.center(), game.player.center()) : U.randomDir();
+        e.timer = U.rand(0.6, 1.2);
+      }
+    }
+    if (e.state === 'drool') { e.frame = 1; return; }
+    e.walk(dt, game.room);
+  };
+
   // ------------------------------------------------------------------ loot
   // weight = relative chance, value = item type or null (nothing)
   var DEFAULT_DROPS = [
@@ -135,6 +152,13 @@
     sprite: 'slime', hp: 1, speed: 60, damage: 1,
     behavior: 'hop', animSpeed: 4,
     hitbox: { x: 2, y: 6, w: 12, h: 10 },
+    drops: DEFAULT_DROPS,
+  });
+
+  // Graveyard zombie: slow and tough, shambles toward you and pauses to drool.
+  E.define('zombie', {
+    sprite: 'zombie', hp: 3, speed: 24, damage: 1,
+    behavior: 'shamble', animSpeed: 4,
     drops: DEFAULT_DROPS,
   });
 

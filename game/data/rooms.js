@@ -162,7 +162,7 @@
       'R..............R',
       'RRRRRRRRRRRRRRRR',
     ],
-    enemies: ['keese', 'keese', 'keese'],
+    enemies: ['keese', 'keese', 'keese', 'zombie', 'zombie'],
     items: [{ type: 'rupee_blue', x: 13, y: 2 }, { type: 'bomb', x: 13, y: 6 }],
     warps: [{ x: 8, y: 8, to: 'cv_s', tx: 7, ty: 8 }],
   });

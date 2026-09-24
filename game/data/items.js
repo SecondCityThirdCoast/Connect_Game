@@ -55,6 +55,14 @@
     onPickup: function (game) { game.win(); },
   });
 
+  // Sold in the shop. Spent automatically when your hearts run out: you respawn where you entered the room.
+  I.define('life', {
+    sprite: 'doll',
+    sound: 'item',
+    message: 'AN EXTRA LIFE!',
+    onPickup: function (game) { game.inventory.lives = Math.min(9, game.inventory.lives + 1); },
+  });
+
   // Level-2 reward: sword upgrade. engine/player.js reads p.swordDamage.
   I.define('sword_white', {
     sprite: 'sword_white',

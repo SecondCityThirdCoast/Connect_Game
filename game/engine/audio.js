@@ -14,6 +14,7 @@ Game.Audio = (function () {
     item:    [{ f: 523, t: 0.12, type: 'square', v: 0.1 }, { f: 659, t: 0.12, type: 'square', v: 0.1 },
               { f: 784, t: 0.12, type: 'square', v: 0.1 }, { f: 1047, t: 0.3, type: 'square', v: 0.1 }],
     door:    [{ f: 150, to: 300, t: 0.2, type: 'square', v: 0.15 }],
+    deny:    [{ f: 220, to: 150, t: 0.14, type: 'square', v: 0.1 }],
     cursor:  [{ f: 880, t: 0.05, type: 'square', v: 0.08 }, { f: 1320, t: 0.05, type: 'square', v: 0.08 }],
     select:  [{ f: 523, t: 0.07, type: 'square', v: 0.08 }, { f: 659, t: 0.07, type: 'square', v: 0.08 }, { f: 784, t: 0.07, type: 'square', v: 0.08 },
               { f: 1047, t: 0.07, type: 'square', v: 0.08 }, { f: 1319, t: 0.3, type: 'square', v: 0.08 }],

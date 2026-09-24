@@ -85,6 +85,8 @@ Game.HUD = (function () {
 
     text(ctx, '-LIFE-', 184, 8, { color: '#d82800' });
     drawHearts(ctx, game, 184, 24);
+    Game.Sprites.draw(ctx, 'doll', 184, 37);
+    text(ctx, 'X' + inv.lives, 194, 39);
   }
 
   // Dialogue box drawn over the top of the room.

@@ -248,7 +248,8 @@
   };
 
   // ---------------------------------------------------------------- Pickup
-  // opts: {lifetime: seconds or null, flag: string -- set when collected so it never respawns}
+  // opts: {lifetime: seconds or null, flag: string -- set when collected so it never respawns,
+  //        price: rupees -- a shop item: refused (with a message) until you can pay, restocks each visit}
   function Pickup(type, x, y, opts) {
     Entity.call(this, x, y);
     opts = opts || {};
@@ -256,19 +257,27 @@
     this.spec = Game.Items.get(type) || {};
     this.lifetime = opts.lifetime || null;
     this.flag = opts.flag || null;
+    this.price = opts.price || 0;
+    this.denied = false; // shown the 'not enough rupees' message; resets once you step off
     this.hb = { x: 2, y: 2, w: 12, h: 12 };
   }
   Pickup.prototype = Object.create(Entity.prototype);
-  Pickup.prototype.update = function (dt) {
+  Pickup.prototype.update = function (dt, game) {
     this.animTime += dt;
+    if (this.denied && game && !U.overlap(game.player.box(), this.box())) this.denied = false;
     if (this.lifetime !== null) {
       this.lifetime -= dt;
       if (this.lifetime <= 0) this.dead = true;
     }
   };
   Pickup.prototype.collect = function (game) {
+    if (this.price && game.inventory.rupees < this.price) {
+      if (!this.denied) { this.denied = true; Game.Audio.play('deny'); game.say('NOT ENOUGH RUPEES.'); }
+      return;
+    }
     var ok = this.spec.onPickup ? this.spec.onPickup(game, game.player) !== false : true;
     if (!ok) return;
+    if (this.price) game.inventory.rupees -= this.price;
     this.dead = true;
     if (this.flag) game.flags[this.flag] = true;
     Game.Audio.play(this.spec.sound || 'pickup');
@@ -282,6 +291,7 @@
     var img = Game.Sprites.get(sprite);
     var w = img ? img.width : 16, h = img ? img.height : 16;
     Game.Sprites.draw(ctx, sprite, ox + this.x + (16 - w) / 2, oy + this.y + (16 - h) / 2);
+    if (this.price) Game.HUD.text(ctx, String(this.price), ox + this.x + 8, oy + this.y + 18, { align: 'center', color: '#f8b800' });
   };
 
   // ---------------------------------------------------------------- Npc

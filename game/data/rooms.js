@@ -9,6 +9,7 @@
 //   enemies: ['octorok', ...]  -> random free tiles
 //            or [{type: 'octorok', x: 3, y: 4}] -> exact tile
 //   items:   [{type: 'key', x, y, flag: 'unique_flag'}] -- with flag = only collectable once
+//            add price: 15 for a shop item (costs rupees, refused until you can pay, restocks)
 //   npcs:    [{type: 'oldman', x, y, text: 'Shown when the room is entered'}]
 //   warps:   [{x, y, to: 'roomId', tx, ty}] -- stepping on warp tile (x,y) sends the
 //            player to tile (tx,ty) of room `to`. Warp tiles are 'C' (cave) and '>' (stairs).
@@ -134,7 +135,7 @@
     map: [
       'RRRRRRRRRRRRRRRR',
       'R..............R',
-      'R..R.......R...R',
+      'R..C.......R...R',
       'R..............R',
       'R.....RR........',
       'R.....RR........',
@@ -145,6 +146,39 @@
       'RRRRRRR..RRRRRRR',
     ],
     enemies: ['slime', 'slime', 'slime'],
+    warps: [{ x: 3, y: 2, to: 'shop', tx: 7, ty: 9 }],
+  });
+
+  // The shop, through the cave in the lone rock at (3,2) of 'west'. Items with a price restock every visit.
+  W.room('shop', {
+    area: 'caves',
+    map: [
+      'RRRRRRRRRRRRRRRR',
+      'RRRRRRRRRRRRRRRR',
+      'RR            RR',
+      'RR            RR',
+      'RR            RR',
+      'RR            RR',
+      'RR            RR',
+      'RR            RR',
+      'RR            RR',
+      'RR            RR',
+      'RRRRRRRCCRRRRRRR',
+    ],
+    npcs: [
+      { type: 'merchant', x: 7, y: 3, text: "BUY SOMETHIN' WILL YA!" },
+      { type: 'fire', x: 4, y: 3 },
+      { type: 'fire', x: 10, y: 3 },
+    ],
+    items: [
+      { type: 'heart', x: 5, y: 7, price: 5 },
+      { type: 'key', x: 7, y: 7, price: 15 },
+      { type: 'life', x: 9, y: 7, price: 30 },
+    ],
+    warps: [
+      { x: 7, y: 10, to: 'west', tx: 3, ty: 3 },
+      { x: 8, y: 10, to: 'west', tx: 3, ty: 3 },
+    ],
   });
 
   W.room('graveyard', {

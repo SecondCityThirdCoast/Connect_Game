@@ -689,7 +689,27 @@
     '....RRRRRRRR....',
   ]);
 
+  D('merchant', [
+    '.....OOOOOO.....',
+    '....OOOOOOOO....',
+    '...OOSSSSSSOO...',
+    '...OSSKSSKSSO...',
+    '...OSSSSSSSSO...',
+    '...OSWWWWWWSO...',
+    '...OOWWWWWWOO...',
+    '..OOOOWWWWOOOO..',
+    '.OOOOOOWWOOOOOO.',
+    '.OOSOOOyyOOOSOO.',
+    '.OSSOOOyyOOOSSO.',
+    '..OOOOOOOOOOOO..',
+    '..OOOOOOOOOOOO..',
+    '..OOOOOOOOOOOO..',
+    '.OOOOOOOOOOOOOO.',
+    '.bbbbbbbbbbbbbb.',
+  ]);
+
   // ---------------------------------------------------------------- ITEMS
+  D('doll', ['..gggg..', '.gGGGGg.', '.SSSSSS.', '.SKSSKS.', '..SSSS..', '.gGGGGg.', 'SGGyyGGS', '.GGGGGG.', '.bb..bb.', '.bb..bb.']);
   D('heart', ['.RR.RR.', 'RRRRRRR', 'RWRRRRR', 'RRRRRRR', '.RRRRR.', '..RRR..', '...R...']);
   D('heart_empty', ['.rr.rr.', 'r..r..r', 'r.....r', 'r.....r', '.r...r.', '..r.r..', '...r...']);
   D('heart_half', ['.RR.rr.', 'RRRR..r', 'RWRR..r', 'RRRR..r', '.RRR.r.', '..RRr..', '...R...']);

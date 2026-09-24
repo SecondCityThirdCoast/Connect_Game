@@ -7,4 +7,5 @@
 
   N.define('oldman', { sprite: 'oldman' });
   N.define('fire', { sprite: 'fire' });
+  N.define('merchant', { sprite: 'merchant' }); // shopkeeper; items with a `price` do the selling
 })();

@@ -52,6 +52,9 @@ Load order matters: engine basics → data/sprites → tiles → world → entit
   only once; opened doors are saved as `tile:<room>:<x>,<y>` flags.
 - Enemies respawn every time you enter a room (like the NES), except in rooms whose
   `clearReward` has already been claimed.
+- Shop items are room `items` with a `price`: they cost rupees, refuse you with a message until you
+  can pay, and restock every visit (see the `shop` room). `inventory.lives` (the `life` item) turns a
+  death into a respawn at the tile where you entered the room.
 
 ## Recipes
 

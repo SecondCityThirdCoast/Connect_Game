@@ -37,7 +37,7 @@
   // ---------------------------------------------------------------- lifecycle
   G.newGame = function () {
     this.flags = {};
-    this.inventory = { rupees: 0, keys: 0, bombs: 0 };
+    this.inventory = { rupees: 0, keys: 0, bombs: 0, lives: 0 };
     this.hero = this.hero || Game.Heroes.byId(this.params.get('hero')) || Game.Heroes.recall() || Game.Heroes[0];
     this.player = new Game.Player(0, 0, this.hero);
     if (this.params.get('sword')) this.player.hasSword = true;
@@ -56,6 +56,17 @@
   };
 
   G.gameOver = function () {
+    // An extra life: spend it and fade back in where you entered this room, hearts full.
+    if (this.inventory.lives > 0) {
+      this.inventory.lives--;
+      this.player.hp = this.player.maxHp;
+      this.player.invuln = 0;
+      this.player.kb = null;
+      this.pendingSay = 'EXTRA LIFE USED!';
+      var e = this.entry || C.START_TILE;
+      this.warp(this.room.id, e.x, e.y, 'gameover');
+      return;
+    }
     this.state = 'gameover';
     this.stateTime = 0;
     Game.Audio.play('gameover');
@@ -72,6 +83,7 @@
     if (tx !== undefined) {
       this.player.x = tx * C.TILE;
       this.player.y = ty * C.TILE;
+      this.entry = { x: tx, y: ty }; // where an extra life puts you back
     }
     this.enterRoom();
   };
@@ -82,12 +94,13 @@
     this.flags['visited:' + this.room.id] = true;
     this.entities = [];
     this.message = null;
+    if (this.pendingSay) { this.say(this.pendingSay); this.pendingSay = null; }
     this.rewardGiven = false;
     this.player.onWarp = true;
 
     (def.items || []).forEach(function (it) {
       if (it.flag && self.flags[it.flag]) return;
-      self.spawn(new Game.Pickup(it.type, it.x * C.TILE, it.y * C.TILE, { flag: it.flag }));
+      self.spawn(new Game.Pickup(it.type, it.x * C.TILE, it.y * C.TILE, { flag: it.flag, price: it.price }));
     });
     (def.npcs || []).forEach(function (n) {
       self.spawn(new Game.Npc(n.type, n.x * C.TILE, n.y * C.TILE, n));
@@ -137,11 +150,11 @@
     this.state = 'scroll';
   };
 
-  G.warp = function (roomId, tx, ty) {
+  G.warp = function (roomId, tx, ty, sound) {
     if (!Game.World.rooms[roomId]) { console.warn('[Game] warp to unknown room "' + roomId + '"'); return; }
     this.fade = { t: 0, to: roomId, tx: tx, ty: ty, switched: false };
     this.state = 'fade';
-    Game.Audio.play('stairs');
+    Game.Audio.play(sound || 'stairs');
   };
 
   // ---------------------------------------------------------------- helpers used by entities/data
@@ -270,6 +283,7 @@
       this.room = s.next;
       this.player.x = s.to.x;
       this.player.y = s.to.y;
+      this.entry = { x: Math.round(s.to.x / C.TILE), y: Math.round(s.to.y / C.TILE) };
       this.scroll = null;
       this.state = 'play';
       this.enterRoom();

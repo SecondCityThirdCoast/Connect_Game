@@ -21,6 +21,7 @@
     'data/rooms.js',
     'engine/hud.js',
     'engine/game.js',
+    'engine/bombs.js',
     'engine/select.js',
     'engine/boot.js',
   ];

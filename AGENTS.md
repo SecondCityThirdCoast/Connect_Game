@@ -31,6 +31,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
 | `game/engine/entity.js` | Base Entity, Enemy, Projectile, Pickup, Npc, Effect classes | shared entity logic |
 | `game/engine/game.js` | State machine, room loading, collisions, rendering | game rules, new states |
 | `game/engine/hud.js` | Top bar, text drawing, dialog box | UI |
+| `game/engine/bombs.js` | The B item: lit bomb, blast damage, explosion animation | bombs, other B items |
 | `game/engine/select.js` | Hero select screen (state `select`, between title and play) | select screen |
 | `game/engine/input.js` | Key/gamepad bindings | controls |
 | `game/engine/cheats.js` | Cheat codes typed as input sequences (Konami code = full health) | new cheats |
@@ -97,9 +98,10 @@ Then place it in a room (`items: [{ type: 'boots', x: 7, y: 5, flag: 'got_boots'
 to a loot table, or give it as a `clearReward`. If it changes the player, read the new field in
 `engine/player.js`.
 
-### Add a B-button item (bombs, boomerang, bow…)
-`Input` already maps `item` to K/X. `player.update` calls `game.useItem()` if it exists.
-Define `Game.GameState.prototype.useItem = function () {...}` in a new file or `game.js`,
+### Add a B-button item (boomerang, bow…)
+`Input` already maps `item` to K/X. `player.update` calls `game.useItem()`, which bombs define in
+`engine/bombs.js` (tuning in `Config.BOMB`). To swap in another item, replace or branch that
+`Game.GameState.prototype.useItem = function () {...}`,
 spawning a `new Game.Projectile({ x, y, dir, sprite, speed, damage, team: 'player', pierce, onHit })`.
 Draw the item in the HUD's B box in `engine/hud.js`.
 

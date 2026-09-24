@@ -82,6 +82,7 @@ Game.HUD = (function () {
     text(ctx, 'B', 141, 6);
     text(ctx, 'A', 165, 6);
     if (game.player.hasSword) Game.Sprites.draw(ctx, game.player.swordDamage > 1 ? 'sword_white' : 'sword_item', 166, 21);
+    if (inv.bombs > 0) Game.Sprites.draw(ctx, 'bomb', 140, 22);
 
     text(ctx, '-LIFE-', 184, 8, { color: '#d82800' });
     drawHearts(ctx, game, 184, 24);

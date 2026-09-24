@@ -22,6 +22,7 @@
     this.ctx.imageSmoothingEnabled = false;
     this.state = 'title';
     this.time = 0;
+    this.shake = 0; // seconds of screen shake left (bombs)
     this.debug = C.DEBUG;
     this.params = new URLSearchParams(window.location.search);
     if (this.params.get('debug')) this.debug = true;
@@ -182,6 +183,7 @@
     this.stateTime = (this.stateTime || 0) + dt;
 
     if (Input.pressed('debug')) this.debug = !this.debug;
+    if (this.shake > 0) this.shake -= dt;
     if (this.state === 'play' || this.state === 'pause') Game.Cheats.update(this); // cheat codes, see engine/cheats.js
 
     switch (this.state) {
@@ -318,6 +320,7 @@
     ctx.beginPath();
     ctx.rect(0, oy, C.WIDTH, C.ROOM_HEIGHT);
     ctx.clip();
+    if (this.shake > 0) ctx.translate(Math.round(U.rand(-2, 2)), Math.round(U.rand(-2, 2)));
 
     if (this.state === 'scroll') {
       var s = this.scroll;
@@ -353,7 +356,7 @@
       ctx.fillStyle = 'rgba(0,0,0,' + (f.t < 1 ? f.t : 2 - f.t) + ')';
       ctx.fillRect(0, oy, C.WIDTH, C.ROOM_HEIGHT);
     }
-    if (this.state === 'pause') this.renderOverlay(ctx, 'PAUSED', ['ARROWS/WASD  MOVE', 'SPACE/J  SWORD', 'ENTER  RESUME', '`  DEBUG VIEW']);
+    if (this.state === 'pause') this.renderOverlay(ctx, 'PAUSED', ['ARROWS/WASD  MOVE', 'SPACE/J  SWORD', 'K/X  BOMB', 'ENTER  RESUME', '`  DEBUG VIEW']);
     if (this.state === 'gameover') this.renderOverlay(ctx, 'GAME OVER', ['PRESS ENTER TO CONTINUE'], '#d82800');
     if (this.state === 'win') this.renderOverlay(ctx, 'YOU WIN!', ['YOU RECOVERED THE TRIFORCE', '', 'RUPEES: ' + this.inventory.rupees, '', 'PRESS ENTER'], '#f8b800');
 

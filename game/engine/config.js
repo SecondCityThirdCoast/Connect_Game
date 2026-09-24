@@ -26,6 +26,13 @@ Game.Config = {
     SWORD_BEAM: true,      // shoot a beam when at full health, like the original
   },
 
+  BOMB: {
+    FUSE: 1.2,             // seconds before a dropped bomb explodes
+    DAMAGE: 4,             // half-hearts to every enemy in the blast (the sword does 1)
+    RADIUS: 24,            // half the blast square in px (24 = a 3x3 tile square)
+    MAX_ACTIVE: 2,         // lit bombs allowed at once
+  },
+
   SCROLL_TIME: 0.6,        // seconds for room-to-room scroll
   FADE_TIME: 0.35,         // seconds for warps (caves / stairs)
   DEBUG: false,            // toggle in-game with the ` key (shows hitboxes)

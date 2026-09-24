@@ -635,6 +635,44 @@
   D('poof_0', ['..W..W..', '.W.WW.W.', 'W.W..W.W', '.W....W.', '.W....W.', 'W.W..W.W', '.W.WW.W.', '..W..W..'], { scale: 2 });
   D('poof_1', ['W......W', '.W....W.', '........', '...WW...', '...WW...', '........', '.W....W.', 'W......W'], { scale: 2 });
 
+  // Bomb blast puffs (engine/bombs.js): a fireball, then a smoke ring.
+  D('boom_0', [
+    '......WWWW......',
+    '....WWOOOOWW....',
+    '...WOOOyyOOOW...',
+    '..WOOyyWWyyOOW..',
+    '..WOyyWWWWyyOW..',
+    '.WOOyWWWWWWyOOW.',
+    '.WOyyWWWWWWyyOW.',
+    '.WOyWWWWWWWWyOW.',
+    '.WOyWWWWWWWWyOW.',
+    '.WOyyWWWWWWyyOW.',
+    '.WOOyWWWWWWyOOW.',
+    '..WOyyWWWWyyOW..',
+    '..WOOyyWWyyOOW..',
+    '...WOOOyyOOOW...',
+    '....WWOOOOWW....',
+    '......WWWW......',
+  ]);
+  D('boom_1', [
+    '.....AAAAAA.....',
+    '...AAWWWWWWAA...',
+    '..AWWOOOOOOWWA..',
+    '.AWOOO....OOOWA.',
+    '.AWO........OWA.',
+    'AWO..........OWA',
+    'AWO..........OWA',
+    'AWO..........OWA',
+    'AWO..........OWA',
+    'AWO..........OWA',
+    'AWO..........OWA',
+    '.AWO........OWA.',
+    '.AWOOO....OOOWA.',
+    '..AWWOOOOOOWWA..',
+    '...AAWWWWWWAA...',
+    '.....AAAAAA.....',
+  ]);
+
   // ---------------------------------------------------------------- NPCS
   D('oldman', [
     '.....RRRRRR.....',

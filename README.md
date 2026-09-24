@@ -2,6 +2,9 @@
 
 A Zelda (NES) style action-adventure. It's plain JavaScript on a canvas with no build step and no dependencies.
 
+## Game Guide/Atlas
+[Artifact](https://claude.ai/artifact/Dn74LeK4qmBnmAa15As7dp)
+
 ## Play locally
 Double-click `index.html`, or serve the folder (`python -m http.server`) and open http://localhost:8000.
 

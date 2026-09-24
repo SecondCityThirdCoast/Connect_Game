@@ -193,6 +193,9 @@
       case 'select':
         this.updateSelect(dt);
         break;
+      case 'ride':
+        this.updateRide(dt);
+        break;
       case 'play':
         if (Input.pressed('start')) { this.state = 'pause'; break; }
         this.updatePlay(dt);

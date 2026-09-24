@@ -746,6 +746,43 @@
     '.bbbbbbbbbbbbbb.',
   ]);
 
+  D('winterbird_0', [
+    '.CC..........CC.',
+    '.CCC........CCC.',
+    '.WCCC......CCCW.',
+    '.WWCCC....CCCWW.',
+    '..WWCC.WW.CCWW..',
+    '...WWWWWWWWWW...',
+    '....WWWKWWKW....',
+    '....WWWWyyWW....',
+    '.....WWWWWW.....',
+    '.....WWWWWW.....',
+    '.....WWWWWW.....',
+    '......WWWW......',
+    '......WWWW......',
+    '.....WW..WW.....',
+    '....WW....WW....',
+    '................',
+  ]);
+  D('winterbird_1', [
+    '................',
+    '................',
+    '................',
+    '.......WW.......',
+    '......WWWW......',
+    '...WWWWWWWWWW...',
+    '..CCWWWKWWKWCC..',
+    '.CCCWWWWyyWWCCC.',
+    'CCC..WWWWWW..CCC',
+    'CC...WWWWWW...CC',
+    '.....WWWWWW.....',
+    '......WWWW......',
+    '......WWWW......',
+    '.....WW..WW.....',
+    '....WW....WW....',
+    '................',
+  ]);
+
   // ---------------------------------------------------------------- ITEMS
   D('doll', ['..gggg..', '.gGGGGg.', '.SSSSSS.', '.SKSSKS.', '..SSSS..', '.gGGGGg.', 'SGGyyGGS', '.GGGGGG.', '.bb..bb.', '.bb..bb.']);
   D('heart', ['.RR.RR.', 'RRRRRRR', 'RWRRRRR', 'RRRRRRR', '.RRRRR.', '..RRR..', '...R...']);

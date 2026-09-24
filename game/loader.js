@@ -22,6 +22,7 @@
     'engine/hud.js',
     'engine/game.js',
     'engine/bombs.js',
+    'engine/ride.js',
     'engine/select.js',
     'engine/boot.js',
   ];

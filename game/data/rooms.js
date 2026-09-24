@@ -15,7 +15,7 @@
 //            player to tile (tx,ty) of room `to`. Warp tiles are 'C' (cave) and '>' (stairs).
 //   clearReward: {type, x, y, flag} -- item appears when every enemy is dead
 //   exits:   {up|down|left|right: 'roomId'} -- optional override of layout neighbours
-//   onEnter(game, room): optional hook
+//   onEnter(game, room): optional hook; onClear(game, room): runs when the last enemy dies
 (function () {
   var W = Game.World;
 
@@ -397,6 +397,12 @@
     enemies: ['ghost', 'ghost', 'keese'],
   });
 
+  // Once the wraith is beaten a winterbird lands here; touch it to fly to the Level-1 boss.
+  function winterbird(game) {
+    game.spawn(new Game.Npc('winterbird', 7 * 16, 2 * 16, { ride: { to: 'd_boss', tx: 7, ty: 8, say: 'THE WINTERBIRD LEAVES YOU AT THE BOSS.' } }));
+    game.say('A WINTERBIRD LANDS. TOUCH IT TO FLY TO THE BOSS.');
+  }
+
   // Boss lair. Beat the wraith for a heart container; the white sword appears after.
   W.room('cv_n', {
     area: 'cavern',
@@ -415,6 +421,8 @@
     ],
     enemies: [{ type: 'boss_wraith', x: 7, y: 3 }],
     clearReward: { type: 'sword_white', x: 7, y: 5, flag: 'cv_sword' },
+    onClear: winterbird,
+    onEnter: function (game) { if (game.flags.cv_sword) winterbird(game); },
   });
 
   // Ossuary: skeletons among the bones.

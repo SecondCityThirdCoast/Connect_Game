@@ -32,6 +32,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
 | `game/engine/game.js` | State machine, room loading, collisions, rendering | game rules, new states |
 | `game/engine/hud.js` | Top bar, text drawing, dialog box | UI |
 | `game/engine/bombs.js` | The B item: lit bomb, blast damage, explosion animation | bombs, other B items |
+| `game/engine/ride.js` | Winterbird rides: state `ride` that carries you to another room | fast travel |
 | `game/engine/select.js` | Hero select screen (state `select`, between title and play) | select screen |
 | `game/engine/input.js` | Key/gamepad bindings | controls |
 | `game/engine/cheats.js` | Cheat codes typed as input sequences (Konami code = full health) | new cheats |
@@ -111,7 +112,9 @@ then draw `tile_spikes` in `data/sprites.js` (tiles are 8×8 art drawn at 2×, u
 
 ### Add an NPC with dialogue
 `npcs: [{ type: 'oldman', x: 7, y: 3, text: 'SECRET IS IN THE GRAVEYARD.' }]` in a room.
-New NPC types go in `game/data/npcs.js` with a sprite.
+New NPC types go in `game/data/npcs.js` with a sprite. To spawn one only under a condition, use the
+room's `onEnter`/`onClear` hooks (`cv_n` spawns a `winterbird` that flies you to `d_boss` once the
+wraith is dead; give it `{ ride: { to, tx, ty, say } }`).
 
 ### Add a sound
 Add an entry to `SFX` in `game/engine/audio.js` and call `Game.Audio.play('name')`.

@@ -16,10 +16,12 @@
     'data/items.js',
     'data/enemies.js',
     'data/npcs.js',
+    'data/heroes.js',
     'engine/player.js',
     'data/rooms.js',
     'engine/hud.js',
     'engine/game.js',
+    'engine/select.js',
     'engine/boot.js',
   ];
 

@@ -51,6 +51,11 @@ for (const [ch, t] of Object.entries(Tiles)) {
   if (typeof t === 'object' && t.sprite && !spriteDefs[t.sprite]) err(`tile '${ch}' uses missing sprite ${t.sprite}`);
 }
 
+for (const h of Game.Heroes || []) {
+  for (const dir of ['down', 'up', 'right']) if (!spriteDefs[h.sprite + '_' + dir + '_0']) err(`hero ${h.id} uses missing sprite ${h.sprite}_${dir}_0`);
+  if (h.desc && h.desc.length > 27) err(`hero ${h.id}: desc is ${h.desc.length} chars (max 27)`);
+}
+
 // ---- rooms
 const passable = (ch) => { const t = Tiles.get(ch); return !t.solid || t.locked; };
 const OPP = { up: 'down', down: 'up', left: 'right', right: 'left' };

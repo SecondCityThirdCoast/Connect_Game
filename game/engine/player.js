@@ -5,11 +5,14 @@
   var U = Game.Util;
   var Input = Game.Input;
 
-  function Player(x, y) {
+  function Player(x, y, hero) {
     Game.Entity.call(this, x, y);
     this.team = 'player';
     this.hb = { x: 2, y: 6, w: 12, h: 10 }; // lower body, so you can overlap walls with your head
-    this.maxHp = P.MAX_HEARTS * 2;
+    this.hero = hero || Game.Heroes[0];
+    this.sprite = this.hero.sprite || 'player';
+    this.speed = this.hero.speed || P.SPEED;
+    this.maxHp = (this.hero.hearts || P.MAX_HEARTS) * 2;
     this.hp = this.maxHp;
     this.hasSword = P.START_WITH_SWORD;
     this.swordDamage = P.SWORD_DAMAGE; // the white sword (data/items.js) raises this
@@ -63,7 +66,7 @@
     if (!dir) return;
     this.dir = dir;
     var d = U.DIRS[dir];
-    var step = P.SPEED * dt;
+    var step = this.speed * dt;
 
     // Grid alignment: slide the cross-axis toward the nearest half-tile.
     var HALF = C.TILE / 2;
@@ -148,7 +151,7 @@
     if (attacking) this.frame = 0;
     // Draw sword behind the player when facing up, in front otherwise.
     if (attacking && this.dir === 'up') this.drawSword(ctx, ox, oy);
-    this.drawSprite(ctx, 'player', ox, oy);
+    this.drawSprite(ctx, this.sprite, ox, oy);
     if (attacking && this.dir !== 'up') this.drawSword(ctx, ox, oy);
     this.frame = savedFrame;
   };

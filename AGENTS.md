@@ -10,6 +10,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
   lengths, room-edge alignment, warps, and enemy/item/npc/sprite references in about a second.
 - URL flags for testing: `index.html?room=d_boss&sword=1&debug=1` (skip the title screen, start
   in a room, start with the sword (`sword=2` for the white sword), show hitboxes). Press `` ` `` in game to toggle debug view.
+  `?hero=mark` plays as a given hero; `?select=1` opens the hero select screen directly.
 - Browser console: `Game.current` is the live game (`Game.current.loadRoom('lake_ne', 7, 5)`,
   `Game.current.player.hp = 99`, `Game.current.inventory.keys = 5`).
 
@@ -22,6 +23,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
 | `game/data/enemies.js` | AI behaviours + enemy types + loot table | new enemies/AI |
 | `game/data/items.js` | Pickups and their effects | new items/powerups |
 | `game/data/npcs.js` | NPC types | new characters |
+| `game/data/heroes.js` | Playable heroes: sprite base, hearts, speed, select-screen text | new heroes |
 | `game/data/sprites.js` | **All pixel art** as text grids | new/changed graphics |
 | `game/engine/sprites.js` | Palette (letter → colour) + renderer | new colours |
 | `game/engine/audio.js` | Synth sound effects table | new sounds |
@@ -29,6 +31,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
 | `game/engine/entity.js` | Base Entity, Enemy, Projectile, Pickup, Npc, Effect classes | shared entity logic |
 | `game/engine/game.js` | State machine, room loading, collisions, rendering | game rules, new states |
 | `game/engine/hud.js` | Top bar, text drawing, dialog box | UI |
+| `game/engine/select.js` | Hero select screen (state `select`, between title and play) | select screen |
 | `game/engine/input.js` | Key/gamepad bindings | controls |
 | `game/engine/cheats.js` | Cheat codes typed as input sequences (Konami code = full health) | new cheats |
 | `game/loader.js` | Ordered list of script files | **add any new .js file here** |

@@ -29,6 +29,7 @@
     this.state = 'title';
     // ?room=<id> skips the title screen and starts there (handy for testing).
     if (this.params.get('room')) this.state = 'play';
+    if (this.params.get('select')) this.openSelect(); // ?select=1 opens the hero select screen
   }
 
   var G = GameState.prototype;
@@ -37,7 +38,8 @@
   G.newGame = function () {
     this.flags = {};
     this.inventory = { rupees: 0, keys: 0, bombs: 0 };
-    this.player = new Game.Player(0, 0);
+    this.hero = this.hero || Game.Heroes.byId(this.params.get('hero')) || Game.Heroes.recall() || Game.Heroes[0];
+    this.player = new Game.Player(0, 0, this.hero);
     if (this.params.get('sword')) this.player.hasSword = true;
     if (this.params.get('sword') === '2') this.player.swordDamage = 2; // ?sword=2 starts with the white sword
     var start = this.params.get('room') || C.START_ROOM;
@@ -171,7 +173,10 @@
 
     switch (this.state) {
       case 'title':
-        if (Input.pressed('start') || Input.pressed('attack')) { Game.Audio.unlock(); this.newGame(); this.state = 'play'; }
+        if (Input.pressed('start') || Input.pressed('attack')) { Game.Audio.unlock(); this.openSelect(); }
+        break;
+      case 'select':
+        this.updateSelect(dt);
         break;
       case 'play':
         if (Input.pressed('start')) { this.state = 'pause'; break; }
@@ -290,6 +295,7 @@
     ctx.fillRect(0, 0, C.WIDTH, C.HEIGHT);
 
     if (this.state === 'title') return this.renderTitle(ctx);
+    if (this.state === 'select') return this.renderSelect(ctx);
 
     HUD.draw(ctx, this);
 

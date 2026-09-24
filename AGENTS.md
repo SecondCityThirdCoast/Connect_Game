@@ -9,7 +9,7 @@ smallest edit that works, follow the existing patterns, and don't restructure.
 - **After every data change run `node tools/check.js`.** It validates rooms, tile chars, row
   lengths, room-edge alignment, warps, and enemy/item/npc/sprite references in about a second.
 - URL flags for testing: `index.html?room=d_boss&sword=1&debug=1` (skip the title screen, start
-  in a room, start with the sword, show hitboxes). Press `` ` `` in game to toggle debug view.
+  in a room, start with the sword (`sword=2` for the white sword), show hitboxes). Press `` ` `` in game to toggle debug view.
 - Browser console: `Game.current` is the live game (`Game.current.loadRoom('lake_ne', 7, 5)`,
   `Game.current.player.hp = 99`, `Game.current.inventory.keys = 5`).
 

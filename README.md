@@ -10,9 +10,10 @@ Double-click `index.html`, or serve the folder (`python -m http.server`) and ope
 
 **Controls:** Arrows/WASD move · Space/J/Z sword · Enter pause · `` ` `` debug hitboxes · gamepad supported.
 
-**Current content:** a 3×3 overworld, a sword cave with an old man, a 4-room dungeon with a key,
-a locked door, a mini-boss and the Triforce. There are 5 enemy types, 8 items, room-scroll
-transitions, warps, a heart container, a sword beam at full health, and game over/continue.
+**Current content:** a 3×3 overworld, a sword cave with an old man, a 4-room dungeon (Level-1) with a key,
+a locked door, a mini-boss and the Triforce, and a 9-room cavern (Level-2) under the graveyard with
+ghosts, skeletons, a wraith boss and the white sword. There are 8 enemy types, 9 items, room-scroll
+transitions, warps, heart containers, a sword beam at full health, and game over/continue.
 
 ## Testing shortcuts
 - `index.html?room=d_boss&sword=1&debug=1`: jump to a room with the sword and hitboxes shown

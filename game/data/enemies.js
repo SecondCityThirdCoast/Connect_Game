@@ -150,4 +150,48 @@
       ctx.restore();
     },
   });
+
+  // ------------------------------------------------------------------ LEVEL-2 (cavern)
+  // Ghosts drift straight through walls toward you and fade in and out.
+  B.haunt = function (e, dt, game) {
+    e.timer -= dt;
+    if (e.timer <= 0) {
+      e.dir = U.chance(0.7) ? U.dirToward(e.center(), game.player.center()) : U.randomDir();
+      e.timer = U.rand(0.4, 1.0);
+      e.faded = U.chance(0.35);
+    }
+    e.walk(dt, game.room);
+  };
+  function drawFaded(base) {
+    return function (e, ctx, ox, oy) {
+      ctx.save();
+      ctx.globalAlpha = e.faded ? 0.45 : 1;
+      e.drawSprite(ctx, base, ox, oy, { flash: e.invuln > 0 });
+      ctx.restore();
+    };
+  }
+
+  E.define('ghost', {
+    sprite: 'ghost', hp: 2, speed: 40, damage: 1,
+    behavior: 'haunt', flying: true, animSpeed: 3,
+    hitbox: { x: 2, y: 2, w: 12, h: 12 },
+    drops: DEFAULT_DROPS,
+    draw: drawFaded('ghost'),
+  });
+
+  // Skeleton warrior: tougher than a moblin and it hunts you down.
+  E.define('stalfos', {
+    sprite: 'stalfos', hp: 3, speed: 45, damage: 1,
+    behavior: 'chase', animSpeed: 6,
+    drops: DEFAULT_DROPS,
+  });
+
+  // Level-2 boss: a wraith that hunts through walls and guarantees a heart container.
+  E.define('boss_wraith', {
+    sprite: 'wraith', hp: 10, speed: 55, damage: 2,
+    behavior: 'haunt', flying: true, knockback: false, animSpeed: 3,
+    hitbox: { x: 2, y: 2, w: 12, h: 12 },
+    drops: [{ weight: 1, value: 'heart_container' }],
+    draw: drawFaded('wraith'),
+  });
 })();

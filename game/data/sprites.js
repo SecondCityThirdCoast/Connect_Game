@@ -443,4 +443,137 @@
   T('tile_dark', [
     'KKKKKKKK', 'KKKKKKKK', 'KKKKKKKK', 'KKKKKKKK', 'KKKKKKKK', 'KKKKKKKK', 'KKKKKKKK', 'KKKKKKKK',
   ]);
+
+  // ---------------------------------------------------------------- LEVEL-2 ENEMIES
+  D('ghost_0', [
+    '.....AAAAAA.....',
+    '....AWWWWWWA....',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWKKWWKKWA...',
+    '...AWKKWWKKWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWKKWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWAWWAWWAA...',
+    '...AA.AWWA.AA...',
+    '......AAAA......',
+    '................',
+  ]);
+  D('ghost_1', [
+    '....AAAAAAAA....',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWKKWWKKWA...',
+    '...AWKKWWKKWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWKKWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AWWWWWWWWA...',
+    '...AAWWAWWAWA...',
+    '...A.AWA.AAA....',
+    '......AAA.......',
+    '................',
+    '................',
+  ]);
+  D('stalfos_0', [
+    '.....WWWWWW.....',
+    '....WWWWWWWW....',
+    '....WKKWWKKW....',
+    '....WWWWWWWW....',
+    '....WWKWWKWW....',
+    '.....WKWKWW.....',
+    '......AWWA......',
+    '....WWWWWWWW....',
+    '...WAWKWWKWAW...',
+    '...W.WKWWKW.W...',
+    '...W.WWWWWW.W...',
+    '...AA.WWWW.AA...',
+    '......WWWW......',
+    '.....WW..WW.....',
+    '.....WW..WW.....',
+    '....AWW..WWA....',
+  ]);
+  D('stalfos_1', [
+    '.....WWWWWW.....',
+    '....WWWWWWWW....',
+    '....WKKWWKKW....',
+    '....WWWWWWWW....',
+    '....WWKWWKWW....',
+    '.....WKWKWW.....',
+    '......AWWA......',
+    '....WWWWWWWW....',
+    '...WAWKWWKWAW...',
+    '...W.WKWWKW.W...',
+    '...W.WWWWWW.W...',
+    '...AA.WWWW.AA...',
+    '......WWWW......',
+    '....WW....WW....',
+    '...WW......WW...',
+    '..AWW......WWA..',
+  ]);
+  D('wraith_0', [
+    '.....KKKKKK.....',
+    '....KRRRRRRK....',
+    '...KRRRRRRRRK...',
+    '...KRrrrrrrRK...',
+    '...KrCCrrCCrK...',
+    '...KrCCrrCCrK...',
+    '...KRrrrrrrRK...',
+    '..KKRRRRRRRRKK..',
+    '.KRRRRRRRRRRRRK.',
+    '.KRRARRRRRRARRK.',
+    '.KRRRRRRRRRRRRK.',
+    '..KRRRRRRRRRRK..',
+    '..KRKRRKRRKRRK..',
+    '...K.KRK.KR.K...',
+    '.....K.K..K.....',
+    '................',
+  ]);
+  D('wraith_1', [
+    '....KKKKKKKK....',
+    '...KRRRRRRRRK...',
+    '...KRRRRRRRRK...',
+    '...KRrrrrrrRK...',
+    '...KrCCrrCCrK...',
+    '...KrCCrrCCrK...',
+    '..KKRRRRRRRRKK..',
+    '.KRRRRRRRRRRRRK.',
+    '.KRRARRRRRRARRK.',
+    '.KRRRRRRRRRRRRK.',
+    '..KRRRRRRRRRRK..',
+    '..KRRKRRKRRRRK..',
+    '...KRK.KRK.KK...',
+    '....K...K..K....',
+    '................',
+    '................',
+  ]);
+
+  // ---------------------------------------------------------------- LEVEL-2 ITEMS
+  D('sword_white', ['..C..', '..W..', '..C..', '..W..', '..C..', '..W..', '..C..', 'yyyyy', '..A..', '..A..', '..A..']);
+
+  // ---------------------------------------------------------------- LEVEL-2 TILES (8x8 at 2x)
+  T('tile_cavefloor', [
+    'aaaaaaaa', 'aaaaaaKa', 'aKaaaaaa', 'aaaaaaaa', 'aaaaKaaa', 'aaaaaaaa', 'aaKaaaaa', 'aaaaaaaa',
+  ]);
+  T('tile_cavewall', [
+    'AAAKAAAA', 'AAAKAAAK', 'KKKAAAKA', 'AAAAKKAA', 'AAKAAAAA', 'AKAAAKAA', 'KAAAAAKK', 'aaaaaaaa',
+  ]);
+  T('tile_stalagmite', [
+    'aaaaaaaa', 'aaaAaaaa', 'aaaAaaaa', 'aaAWAaaa', 'aaAAAaaa', 'aAAAAAaa', 'aAAAAAKa', 'aaaKKKaa',
+  ]);
+  T('tile_pool', [
+    'uuuuuuuu', 'uuUuuuuu', 'uuuuuuUu', 'uuuuuuuu', 'uUuuuuuu', 'uuuuUuuu', 'uuuuuuuu', 'uuUuuuuu',
+  ]);
+  T('tile_bones', [
+    'aaaaaaaa', 'aWWWWWaa', 'aWKWKWaa', 'aWWWWWaa', 'aaWaWaaa', 'aaaaaWWa', 'aaaaWWaa', 'aaaaaaaa',
+  ]);
+  T('tile_shrooms', [
+    'aaaaaaaa', 'aaCCaaaa', 'aCCCCaaa', 'aaWWaaCa', 'aaWWaCCC', 'aaaaaaWa', 'aMMaaaWa', 'aWWaaaaa',
+  ]);
 })();

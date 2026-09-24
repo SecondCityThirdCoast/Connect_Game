@@ -39,6 +39,7 @@
     this.inventory = { rupees: 0, keys: 0, bombs: 0 };
     this.player = new Game.Player(0, 0);
     if (this.params.get('sword')) this.player.hasSword = true;
+    if (this.params.get('sword') === '2') this.player.swordDamage = 2; // ?sword=2 starts with the white sword
     var start = this.params.get('room') || C.START_ROOM;
     this.loadRoom(start, C.START_TILE.x, C.START_TILE.y);
   };
@@ -234,7 +235,7 @@
       if (e.dead) return;
       if (e instanceof Game.Enemy) {
         if (e.spawnTime > 0) return;
-        if (sword && U.overlap(sword, e.box())) e.hurt(C.PLAYER.SWORD_DAMAGE, p, self);
+        if (sword && U.overlap(sword, e.box())) e.hurt(p.swordDamage, p, self);
         if (!e.dead && U.overlap(pBox, e.box())) p.hurt(e.damage, e, self);
       } else if (e instanceof Game.Projectile) {
         if (e.team === 'player') {

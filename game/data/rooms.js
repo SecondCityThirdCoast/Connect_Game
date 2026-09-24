@@ -158,12 +158,13 @@
       'R..............R',
       'R.S..S..S..S...R',
       'R..............R',
-      'R..............R',
+      'R......S>S.....R',
       'R..............R',
       'RRRRRRRRRRRRRRRR',
     ],
     enemies: ['keese', 'keese', 'keese'],
     items: [{ type: 'rupee_blue', x: 13, y: 2 }, { type: 'bomb', x: 13, y: 6 }],
+    warps: [{ x: 8, y: 8, to: 'cv_s', tx: 7, ty: 8 }],
   });
 
   W.room('east', {
@@ -304,5 +305,204 @@
     ],
     enemies: [{ type: 'boss_moblin', x: 7, y: 3 }],
     clearReward: { type: 'triforce', x: 7, y: 5, flag: 'triforce' },
+  });
+
+  // ================================================================== LEVEL-2: THE CAVERN
+  // Under the graveyard (stairs at 8,8). Tiles: '%' rock wall, ':' cave floor, '^' stalagmite,
+  // '~' black water, '*' bones, '&' glowing mushrooms, 'D' locked door (opens to cave floor).
+  W.area('cavern', {
+    name: 'LEVEL-2',
+    layout: [
+      ['cv_nw', 'cv_n', 'cv_ne'],
+      ['cv_w', 'cv_hub', 'cv_e'],
+      ['cv_sw', 'cv_s', 'cv_se'],
+    ],
+  });
+
+  // Entrance. Stairs at (7,9) lead back up to the graveyard.
+  W.room('cv_s', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%::%%%%%%%',
+      '%::::::::::::::%',
+      '%:^::::::::::^:%',
+      '%::::::::::::::%',
+      '::::::::::::::::',
+      '::::::::::::::::',
+      '::::::::::::::::',
+      '%::::::::::::::%',
+      '%:*::::::::::*:%',
+      '%::::::>:::::::%',
+      '%%%%%%%%%%%%%%%%',
+    ],
+    enemies: ['keese', 'keese'],
+    warps: [{ x: 7, y: 9, to: 'graveyard', tx: 8, ty: 9 }],
+    onEnter: function (game) {
+      if (game.flags.cv_seen) return;
+      game.flags.cv_seen = true;
+      game.say('THE AIR IS COLD. SOMETHING STIRS BELOW.');
+    },
+  });
+
+  // Crossroads around a black pond. The north door is locked (key from cv_ne).
+  W.room('cv_hub', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%DD%%%%%%%',
+      '%::::::::::::::%',
+      '%:^:::~~~~:::^:%',
+      '%::::~~~~~~::::%',
+      '::::::~~~~::::::',
+      '::::::~~~~::::::',
+      '::::::::::::::::',
+      '%::::::::::::::%',
+      '%:^::::::::::^:%',
+      '%::::::::::::::%',
+      '%%%%%%%::%%%%%%%',
+    ],
+    enemies: ['ghost', 'ghost', 'keese'],
+  });
+
+  // Boss lair. Beat the wraith for a heart container; the white sword appears after.
+  W.room('cv_n', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%%%%%%%%%%',
+      '%::::::::::::::%',
+      '%:*::::::::::*:%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%:*::::::::::*:%',
+      '%::::::::::::::%',
+      '%%%%%%%::%%%%%%%',
+    ],
+    enemies: [{ type: 'boss_wraith', x: 7, y: 3 }],
+    clearReward: { type: 'sword_white', x: 7, y: 5, flag: 'cv_sword' },
+  });
+
+  // Ossuary: skeletons among the bones.
+  W.room('cv_w', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%::%%%%%%%',
+      '%:*:::::::::*::%',
+      '%::::^:::::::::%',
+      '%:::::::::*::::%',
+      '%:::::::::::::::',
+      '%::*:::::^::::::',
+      '%:::::::::::::::',
+      '%::::^::::::*::%',
+      '%:*::::::::::::%',
+      '%::::::::*:::::%',
+      '%%%%%%%::%%%%%%%',
+    ],
+    enemies: ['stalfos', 'stalfos'],
+  });
+
+  // The black lake. A plank bridge reaches an island with a prize; ghosts cross water freely.
+  W.room('cv_e', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%::%%%%%%%',
+      '%::::::::::::::%',
+      '%:::~~~~~~~~~~:%',
+      '%::~~~~~~~~~~~:%',
+      '::::~~~~~~:::~:%',
+      '::::~~~~~~:::~:%',
+      ':::::=====:::~:%',
+      '%::~~~~~~~~~~~:%',
+      '%:::~~~~~~~~~~:%',
+      '%::::::::::::::%',
+      '%%%%%%%::%%%%%%%',
+    ],
+    enemies: ['ghost', 'keese', 'keese'],
+    items: [{ type: 'rupee_blue', x: 11, y: 5 }],
+  });
+
+  // Key room: clear it to reveal the key that opens the hub's north door.
+  W.room('cv_ne', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%%%%%%%%%%',
+      '%::::::::::::::%',
+      '%:^^::::::::^^:%',
+      '%:^::::::::::^:%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%:^::::::::::^:%',
+      '%:^^::::::::^^:%',
+      '%::::::::::::::%',
+      '%%%%%%%::%%%%%%%',
+    ],
+    enemies: ['stalfos', 'stalfos', 'keese'],
+    clearReward: { type: 'key', x: 7, y: 5, flag: 'cv_key' },
+  });
+
+  // Mushroom grotto: a dead end with supplies, haunted.
+  W.room('cv_nw', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%%%%%%%%%%',
+      '%:&::::::::::&:%',
+      '%::::~~~~~~::::%',
+      '%:::~~~~~~~~:::%',
+      '%:::~~~~~~~~:::%',
+      '%::::~~~~~~::::%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%:&::::::::::&:%',
+      '%::::::::::::::%',
+      '%%%%%%%::%%%%%%%',
+    ],
+    enemies: ['ghost', 'ghost'],
+    items: [{ type: 'bomb', x: 13, y: 4 }, { type: 'rupee_blue', x: 2, y: 4 }],
+  });
+
+  // Shrine: no enemies, a hint, and a heart that comes back every visit.
+  W.room('cv_sw', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%::%%%%%%%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%:::&::::::&:::%',
+      '%:::::::::::::::',
+      '%:::::::::::::::',
+      '%:::::::::::::::',
+      '%:::&::::::&:::%',
+      '%::::::::::::::%',
+      '%::::::::::::::%',
+      '%%%%%%%%%%%%%%%%',
+    ],
+    npcs: [
+      { type: 'oldman', x: 7, y: 3, text: 'THE KEY LIES BEYOND THE BLACK LAKE. BEWARE THE WRAITH.' },
+      { type: 'fire', x: 5, y: 3 },
+      { type: 'fire', x: 9, y: 3 },
+    ],
+    items: [{ type: 'heart', x: 7, y: 6 }],
+  });
+
+  // Bat cave: a forest of stalagmites.
+  W.room('cv_se', {
+    area: 'cavern',
+    map: [
+      '%%%%%%%::%%%%%%%',
+      '%::::::::::::::%',
+      '%:^:^::::^:^:^:%',
+      '%::::::^:::::::%',
+      ':::^::::::^::::%',
+      '::::::^:::::^::%',
+      ':::^::::::^::::%',
+      '%::::::^:::::::%',
+      '%:^:^::::^:^:^:%',
+      '%:::*::::::::*:%',
+      '%%%%%%%%%%%%%%%%',
+    ],
+    enemies: ['keese', 'keese', 'keese'],
+    items: [{ type: 'rupee_blue', x: 13, y: 1 }],
   });
 })();

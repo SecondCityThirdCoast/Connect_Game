@@ -54,4 +54,12 @@
     sound: 'item',
     onPickup: function (game) { game.win(); },
   });
+
+  // Level-2 reward: sword upgrade. engine/player.js reads p.swordDamage.
+  I.define('sword_white', {
+    sprite: 'sword_white',
+    sound: 'item',
+    message: 'THE WHITE SWORD! IT STRIKES TWICE AS HARD.',
+    onPickup: function (game, p) { p.hasSword = true; p.swordDamage = 2; },
+  });
 })();

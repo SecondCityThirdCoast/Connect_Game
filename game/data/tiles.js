@@ -23,6 +23,14 @@ Game.Tiles = {
   'S': { sprite: 'tile_statue', solid: true },
   'L': { sprite: 'tile_locked', solid: true, locked: true, opensTo: 'f' },
   '>': { sprite: 'tile_stairs', warp: true },
+  // Level-2 cavern
+  ':': { sprite: 'tile_cavefloor' },
+  '%': { sprite: 'tile_cavewall', solid: true },
+  '^': { sprite: 'tile_stalagmite', solid: true },
+  '~': { sprite: 'tile_pool', solid: true, water: true },
+  '*': { sprite: 'tile_bones' },
+  '&': { sprite: 'tile_shrooms' },
+  'D': { sprite: 'tile_locked', solid: true, locked: true, opensTo: ':' },
 };
 
 Game.Tiles.DEFAULT = '.';

@@ -12,6 +12,7 @@
     this.maxHp = P.MAX_HEARTS * 2;
     this.hp = this.maxHp;
     this.hasSword = P.START_WITH_SWORD;
+    this.swordDamage = P.SWORD_DAMAGE; // the white sword (data/items.js) raises this
     this.attackTime = 0;
     this.walkDist = 0;
     this.onWarp = true; // must step off a warp tile before it can trigger
@@ -97,7 +98,7 @@
       var d = U.DIRS[this.dir];
       game.spawn(new Game.Projectile({
         x: this.x + 6 + d.x * 12, y: this.y + 6 + d.y * 12, dir: this.dir, kind: 'beam',
-        sprite: 'beam', speed: 220, damage: P.SWORD_DAMAGE, team: 'player',
+        sprite: 'beam', speed: 220, damage: this.swordDamage, team: 'player',
       }));
       Game.Audio.play('beam');
     }
